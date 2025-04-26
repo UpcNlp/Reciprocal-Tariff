@@ -1,0 +1,62 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\projects\\TCSS\\RT\\Reciprocal-Tariff\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4DD34961-F2E0-4E00-8433-81A441B24B8C}|Reciprocal-Tariff.pyproj|D:\\projects\\TCSS\\RT\\Reciprocal-Tariff\\DataConstruct\\DouBaoTest.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{4DD34961-F2E0-4E00-8433-81A441B24B8C}|Reciprocal-Tariff.pyproj|solutionrelative:DataConstruct\\DouBaoTest.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4DD34961-F2E0-4E00-8433-81A441B24B8C}|Reciprocal-Tariff.pyproj|D:\\projects\\TCSS\\RT\\Reciprocal-Tariff\\Data\\video_7466471855533067563.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4DD34961-F2E0-4E00-8433-81A441B24B8C}|Reciprocal-Tariff.pyproj|solutionrelative:Data\\video_7466471855533067563.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 344,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "video_7466471855533067563.json",
+              "DocumentMoniker": "D:\\projects\\TCSS\\RT\\Reciprocal-Tariff\\Data\\video_7466471855533067563.json",
+              "RelativeDocumentMoniker": "Data\\video_7466471855533067563.json",
+              "ToolTip": "D:\\projects\\TCSS\\RT\\Reciprocal-Tariff\\Data\\video_7466471855533067563.json",
+              "RelativeToolTip": "Data\\video_7466471855533067563.json",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABAAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-26T07:50:18.382Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DouBaoTest.py",
+              "DocumentMoniker": "D:\\projects\\TCSS\\RT\\Reciprocal-Tariff\\DataConstruct\\DouBaoTest.py",
+              "RelativeDocumentMoniker": "DataConstruct\\DouBaoTest.py",
+              "ToolTip": "D:\\projects\\TCSS\\RT\\Reciprocal-Tariff\\DataConstruct\\DouBaoTest.py",
+              "RelativeToolTip": "DataConstruct\\DouBaoTest.py",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAACAQAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-04-25T12:40:40.974Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
