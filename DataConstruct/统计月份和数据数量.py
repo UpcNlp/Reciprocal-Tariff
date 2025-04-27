@@ -28,6 +28,7 @@ def main():
                                 "total_video": 1,
                                 "English": 0,
                                 "Chinese": 0,
+                                "Mixed": 0,
                                 "Other": 0,
                                 "pure_emoji": 0,
                             }
@@ -42,6 +43,8 @@ def main():
                                 month_count[date]["English"] += 1
                             if comment["language"] == "Chinese":
                                 month_count[date]["Chinese"] += 1
+                            if comment["language"] == "Mixed":
+                                month_count[date]["Mixed"] += 1
                             if comment["language"] == "Other":
                                 month_count[date]["Other"] += 1
                             if comment["pure_emoji"] == True:
