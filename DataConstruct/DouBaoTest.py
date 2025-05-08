@@ -6,7 +6,7 @@ client = OpenAI(
     # 此为默认路径，您可根据业务所在地域进行配置
     base_url="https://ark.cn-beijing.volces.com/api/v3",
     # 从环境变量中获取您的 API Key
-    api_key="5596a588-590c-4fc1-8287-c3ee9f54ff27",
+    api_key="8835994c-137b-42c1-862c-c83e1c02ed1a",
 )
 
 # Non-streaming:
