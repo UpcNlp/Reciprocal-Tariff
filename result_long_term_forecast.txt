@@ -1,3 +1,18 @@
 long_term_forecast_test_TimeXer_RT_ftMS_sl12_ll6_pl6_dm512_nh8_el2_dl1_df512_expand2_dc4_fc3_ebtimeF_dtTrue_Timexer-MS_0  
 mse:0.24612624943256378, mae:0.34335723519325256, dtw:Not calculated
 
+long_term_forecast_test_TimeXer_RT_ftMS_sl12_ll6_pl6_dm512_nh8_el2_dl1_df512_expand2_dc4_fc3_ebtimeF_dtTrue_Timexer-MS_0  
+mse:0.14376869797706604, mae:0.28831395506858826, dtw:Not calculated
+
+long_term_forecast_test_TimeXer_RT_ftMS_sl12_ll6_pl6_dm512_nh8_el2_dl1_df512_expand2_dc4_fc3_ebtimeF_dtTrue_Timexer-MS_0  
+mse:nan, mae:nan, dtw:Not calculated
+
+long_term_forecast_test_TimeXer_RT_ftMS_sl12_ll6_pl6_dm512_nh8_el2_dl1_df512_expand2_dc4_fc3_ebtimeF_dtTrue_Timexer-MS_0  
+mse:0.2708498537540436, mae:0.4267996549606323, dtw:Not calculated
+
+long_term_forecast_test_TimeXer_RT_ftMS_sl12_ll6_pl6_dm512_nh8_el2_dl1_df512_expand2_dc4_fc3_ebtimeF_dtTrue_Timexer-MS_0  
+mse:0.2708498537540436, mae:0.4267996549606323, dtw:Not calculated
+
+long_term_forecast_test_TimeXer_RT_ftMS_sl12_ll6_pl6_dm512_nh8_el2_dl1_df512_expand2_dc4_fc3_ebtimeF_dtTrue_Timexer-MS_0  
+mse:0.14526741206645966, mae:0.28933390974998474, dtw:Not calculated
+

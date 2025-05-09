@@ -36,12 +36,13 @@ if __name__ == '__main__':
     # ----修改4----数据集路径，目前应该是 ./TSModels/dataset/ETT-small/, 修改为RT/ALL_Combined_Data.csv
     parser.add_argument('--root_path', type=str, default='./TSModels/dataset/RT/', help='root path of the data file')
     # ----修改5----数据集文件名，目前应该是ETTh1.csv
-    parser.add_argument('--data_path', type=str, default='ALL_Combined_Data.csv', help='data file')
+    data_path = 'Label_EX.csv'
+    parser.add_argument('--data_path', type=str, default=data_path, help='data file')
     # ----修改6----应该是选择多变量预测单变量，或者说外生变量存在的情况下预测，MS
     parser.add_argument('--features', type=str, default='MS',
                         help='forecasting task, options:[M, S, MS]; M:multivariate predict multivariate, S:univariate predict univariate, MS:multivariate predict univariate')
     # ----修改7----im_ex
-    parser.add_argument('--target', type=str, default='im_ex', help='target feature in S or MS task')
+    parser.add_argument('--target', type=str, default='TT', help='target feature in S or MS task')
     parser.add_argument('--freq', type=str, default='h',
                         help='freq for time features encoding, options:[s:secondly, t:minutely, h:hourly, d:daily, b:business days, w:weekly, m:monthly], you can also use more detailed freq like 15min or 3h')
     parser.add_argument('--checkpoints', type=str, default='./checkpoints/', help='location of model checkpoints')
@@ -108,12 +109,12 @@ if __name__ == '__main__':
     des = 'Timexer-MS'
     itr = 1
     batch_size = 4
-    epochs = 1
+    epochs = 20
     parser.add_argument('--num_workers', type=int, default=10, help='data loader num workers')
     parser.add_argument('--itr', type=int, default=itr, help='experiments times')
     parser.add_argument('--train_epochs', type=int, default=epochs, help='train epochs')
     parser.add_argument('--batch_size', type=int, default=batch_size, help='batch size of train input data')
-    parser.add_argument('--patience', type=int, default=3, help='early stopping patience')
+    parser.add_argument('--patience', type=int, default=5, help='early stopping patience')
     parser.add_argument('--learning_rate', type=float, default=0.0001, help='optimizer learning rate')
     parser.add_argument('--des', type=str, default=des, help='exp description')
     parser.add_argument('--loss', type=str, default='MSE', help='loss function')

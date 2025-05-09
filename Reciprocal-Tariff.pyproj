@@ -110,10 +110,6 @@
     <Folder Include="DisscusionData2-中国制造商试图从Tiktok网购规避关税\" />
     <Folder Include="TSModels\" />
     <Folder Include="TSModels\checkpoints\" />
-    <Folder Include="TSModels\checkpoints\long_term_forecast_ETTh1_96_192_TimesNet_ETTh1_ftM_sl96_ll48_pl192_dm16_nh8_el2_dl1_df32_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0\" />
-    <Folder Include="TSModels\checkpoints\long_term_forecast_ETTh1_96_336_TimesNet_ETTh1_ftM_sl96_ll48_pl336_dm16_nh8_el2_dl1_df32_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0\" />
-    <Folder Include="TSModels\checkpoints\long_term_forecast_ETTh1_96_720_TimesNet_ETTh1_ftM_sl96_ll48_pl720_dm16_nh8_el2_dl1_df32_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0\" />
-    <Folder Include="TSModels\checkpoints\long_term_forecast_ETTh1_96_96_TimesNet_ETTh1_ftM_sl96_ll48_pl96_dm16_nh8_el2_dl1_df32_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0\" />
     <Folder Include="TSModels\dataset\" />
     <Folder Include="TSModels\dataset\electricity\" />
     <Folder Include="TSModels\dataset\EthanolConcentration\" />
@@ -197,10 +193,6 @@
     <Folder Include="符合条件的Tiktok数据\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TSModels\checkpoints\long_term_forecast_ETTh1_96_192_TimesNet_ETTh1_ftM_sl96_ll48_pl192_dm16_nh8_el2_dl1_df32_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0\checkpoint.pth" />
-    <Content Include="TSModels\checkpoints\long_term_forecast_ETTh1_96_336_TimesNet_ETTh1_ftM_sl96_ll48_pl336_dm16_nh8_el2_dl1_df32_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0\checkpoint.pth" />
-    <Content Include="TSModels\checkpoints\long_term_forecast_ETTh1_96_720_TimesNet_ETTh1_ftM_sl96_ll48_pl720_dm16_nh8_el2_dl1_df32_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0\checkpoint.pth" />
-    <Content Include="TSModels\checkpoints\long_term_forecast_ETTh1_96_96_TimesNet_ETTh1_ftM_sl96_ll48_pl96_dm16_nh8_el2_dl1_df32_expand2_dc4_fc3_ebtimeF_dtTrue_Exp_0\checkpoint.pth" />
     <Content Include="TSModels\dataset\electricity\.DS_Store" />
     <Content Include="TSModels\dataset\electricity\electricity.csv" />
     <Content Include="TSModels\dataset\EthanolConcentration\EthanolConcentration_TEST.ts" />
@@ -245,7 +237,6 @@
     <Content Include="TSModels\dataset\PSM\test.csv" />
     <Content Include="TSModels\dataset\PSM\test_label.csv" />
     <Content Include="TSModels\dataset\PSM\train.csv" />
-    <Content Include="TSModels\dataset\RT\ALL_Combined_Data.csv" />
     <Content Include="TSModels\dataset\SelfRegulationSCP1\SelfRegulationSCP1_TEST.ts" />
     <Content Include="TSModels\dataset\SelfRegulationSCP1\SelfRegulationSCP1_TRAIN.ts" />
     <Content Include="TSModels\dataset\SelfRegulationSCP2\SelfRegulationSCP2_TEST.ts" />
