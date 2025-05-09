@@ -1,4 +1,4 @@
-import os
+﻿import os
 import numpy as np
 import pandas as pd
 import glob
@@ -17,16 +17,37 @@ warnings.filterwarnings('ignore')
 
 
 class Dataset_ETT_hour(Dataset):
+    """
+    ETT小时级别数据集加载类，继承自torch.utils.data.Dataset
+    用于加载和预处理ETT (Electricity Transformer Temperature) 小时级别的时间序列数据
+    """
     def __init__(self, args, root_path, flag='train', size=None,
                  features='S', data_path='ETTh1.csv',
                  target='OT', scale=True, timeenc=0, freq='h', seasonal_patterns=None):
-        # size [seq_len, label_len, pred_len]
+        """
+        初始化数据集类
+        
+        参数:
+            args: 包含各种配置的参数对象
+            root_path: 数据集根目录
+            flag: 数据集类型标志，'train'表示训练集，'test'表示测试集，'val'表示验证集
+            size: 包含序列长度信息的列表 [seq_len, label_len, pred_len]，若为None则使用默认值
+            features: 特征选择模式，'S'表示单变量预测单变量，'M'表示多变量预测多变量，'MS'表示多变量预测单变量
+            data_path: 数据文件名
+            target: 目标特征列名称（当features为'S'或'MS'时使用）
+            scale: 是否对数据进行标准化处理
+            timeenc: 时间编码方式，0表示使用时间特征分量（月、日、星期、小时），1表示使用time_features函数
+            freq: 时间频率，'h'表示小时级别
+            seasonal_patterns: 季节性模式，某些数据集可能使用
+        """
+        # size参数包含 [seq_len（输入序列长度）, label_len（开始令牌长度）, pred_len（预测序列长度）]
         self.args = args
-        # info
+        # 设置序列长度参数
         if size == None:
-            self.seq_len = 24 * 4 * 4
-            self.label_len = 24 * 4
-            self.pred_len = 24 * 4
+            # 默认值：输入序列长度为24*4*4小时=16天，标签长度为24*4小时=4天，预测长度为24*4小时=4天
+            self.seq_len = 24 * 4 * 4  # 输入序列长度（384小时）
+            self.label_len = 24 * 4    # 标签开始长度（96小时）
+            self.pred_len = 24 * 4     # 预测序列长度（96小时）
         else:
             self.seq_len = size[0]
             self.label_len = size[1]
@@ -44,33 +65,48 @@ class Dataset_ETT_hour(Dataset):
 
         self.root_path = root_path
         self.data_path = data_path
-        self.__read_data__()
+        self.__read_data__()  # 调用数据读取方法
 
     def __read_data__(self):
+        """
+        读取并预处理数据
+        包括数据加载、特征选择、标准化、时间特征提取等步骤
+        """
+        # 初始化StandardScaler用于数据标准化
         self.scaler = StandardScaler()
         df_raw = pd.read_csv(os.path.join(self.root_path,
                                           self.data_path))
 
+        # 设置数据边界：用于划分训练集、验证集和测试集
+        # 训练集: [0, 12*30*24]
+        # 验证集: [12*30*24-seq_len, 12*30*24+4*30*24]
+        # 测试集: [12*30*24+4*30*24-seq_len, 12*30*24+8*30*24]
         border1s = [0, 12 * 30 * 24 - self.seq_len, 12 * 30 * 24 + 4 * 30 * 24 - self.seq_len]
         border2s = [12 * 30 * 24, 12 * 30 * 24 + 4 * 30 * 24, 12 * 30 * 24 + 8 * 30 * 24]
-        border1 = border1s[self.set_type]
-        border2 = border2s[self.set_type]
+        # 根据数据集类型选择对应的边界
+        border1 = border1s[self.set_type]  # 当前数据集的开始索引
+        border2 = border2s[self.set_type]  # 当前数据集的结束索引
 
+        # 根据features参数选择相应的列
         if self.features == 'M' or self.features == 'MS':
+            # 多变量模式：选择除第一列（通常是日期）外的所有列
             cols_data = df_raw.columns[1:]
             df_data = df_raw[cols_data]
         elif self.features == 'S':
+            # 单变量模式：只选择目标列
             df_data = df_raw[[self.target]]
-
+        # 数据标准化处理
         if self.scale:
+            # 仅使用训练集数据拟合StandardScaler
             train_data = df_data[border1s[0]:border2s[0]]
             self.scaler.fit(train_data.values)
+            # 对所有数据进行转换
             data = self.scaler.transform(df_data.values)
         else:
             data = df_data.values
-
-        df_stamp = df_raw[['date']][border1:border2]
-        df_stamp['date'] = pd.to_datetime(df_stamp.date)
+        # 提取时间戳相关特征
+        df_stamp = df_raw[['date']][border1:border2]  # 获取当前数据集范围内的日期列
+        df_stamp['date'] = pd.to_datetime(df_stamp.date)  # 转换为datetime格式
         if self.timeenc == 0:
             df_stamp['month'] = df_stamp.date.apply(lambda row: row.month, 1)
             df_stamp['day'] = df_stamp.date.apply(lambda row: row.day, 1)
@@ -81,15 +117,30 @@ class Dataset_ETT_hour(Dataset):
             data_stamp = time_features(pd.to_datetime(df_stamp['date'].values), freq=self.freq)
             data_stamp = data_stamp.transpose(1, 0) 
 
-        self.data_x = data[border1:border2]
-        self.data_y = data[border1:border2]
+        self.data_x = data[border1:border2] # 输入数据
+        self.data_y = data[border1:border2] # 输出数据（与输入相同，在__getitem__中会进行不同的切片）
 
+        # 数据增强处理（仅在训练集上且参数允许时执行）
         if self.set_type == 0 and self.args.augmentation_ratio > 0:
             self.data_x, self.data_y, augmentation_tags = run_augmentation_single(self.data_x, self.data_y, self.args)
 
+        # 保存时间戳特征
         self.data_stamp = data_stamp
 
     def __getitem__(self, index):
+        """
+        获取指定索引的数据样本
+        
+        参数:
+            index: 样本索引
+            
+        返回:
+            seq_x: 输入序列数据
+            seq_y: 目标序列数据
+            seq_x_mark: 输入序列对应的时间戳特征
+            seq_y_mark: 目标序列对应的时间戳特征
+        """
+        # 计算序列开始和结束位置
         s_begin = index
         s_end = s_begin + self.seq_len
         r_begin = s_end - self.label_len
@@ -103,9 +154,27 @@ class Dataset_ETT_hour(Dataset):
         return seq_x, seq_y, seq_x_mark, seq_y_mark
 
     def __len__(self):
+        """
+        返回数据集中样本的数量
+        
+        返回:
+            有效样本数量（考虑了序列长度和预测长度的限制）
+        """
+        # 总数据长度减去序列长度和预测长度，再加1
+        # 这确保了最后一个样本的目标序列不会超出数据范围
         return len(self.data_x) - self.seq_len - self.pred_len + 1
 
     def inverse_transform(self, data):
+        """
+        将标准化后的数据还原为原始尺度
+        
+        参数:
+            data: 需要反向转换的数据
+            
+        返回:
+            反向转换后的数据
+        """
+        # 使用之前拟合的scaler进行反向转换
         return self.scaler.inverse_transform(data)
 
 
@@ -203,22 +272,22 @@ class Dataset_ETT_minute(Dataset):
     def inverse_transform(self, data):
         return self.scaler.inverse_transform(data)
 
-
+# 修改为月份预测 M
 class Dataset_Custom(Dataset):
     def __init__(self, args, root_path, flag='train', size=None,
-                 features='S', data_path='ETTh1.csv',
-                 target='OT', scale=True, timeenc=0, freq='h', seasonal_patterns=None):
+                 features='MS', data_path='ETTh1.csv',
+                 target='im_ex', scale=True, timeenc=0, freq='M', seasonal_patterns=None):
         # size [seq_len, label_len, pred_len]
         self.args = args
         # info
         if size == None:
-            self.seq_len = 24 * 4 * 4
-            self.label_len = 24 * 4
-            self.pred_len = 24 * 4
+           self.seq_len = 12  # 输入序列长度为12个月
+           self.label_len = 6  # 标签长度为6个月
+           self.pred_len = 6  # 预测序列长度为6个月
         else:
-            self.seq_len = size[0]
-            self.label_len = size[1]
-            self.pred_len = size[2]
+           self.seq_len = size[0]
+           self.label_len = size[1]
+           self.pred_len = size[2]
         # init
         assert flag in ['train', 'test', 'val']
         type_map = {'train': 0, 'val': 1, 'test': 2}
